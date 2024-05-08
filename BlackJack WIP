@@ -1,4 +1,8 @@
 var currentScene = 0;
+var DealerCard = [];
+var PlayerCard = [];
+var DealerValue = 0;
+var PlayerValue = 0;
 var btnObj = function(config){
     this.x = config.x;
     this.y = config.y;
@@ -25,32 +29,52 @@ btnObj.prototype.handleMouseClick = function() {
     }
 };
 var btn1 = new btnObj({
-    x: 125,
+    x: 105,
     y: 320,
     width:150,
     label: "Play Now!",
     onClick: function(){currentScene = 1;}
 });
 var btn2 = new btnObj({
-    x:285,
-    y:340,
-    vari:30,
-    width:100,
+    x:255,
+    y:349,
+    vari:15,
+    width:70,
     label:"Rules",
     onClick: function(){currentScene = 2;}
 });
 var btn3 = new btnObj({
-    x:10,
-    y:340,
+    x:0,
+    y:349,
     vari:5,
     width:100,
     label:"Back to Start!",
     onClick: function(){currentScene = 0;}
 });
+var btn5 = new btnObj({
+        x:349,
+        y:156,
+        vari:15,
+        height:45,
+        width:50,
+        label:"Hit",
+        onClick: function(){PlayerCard.push(ceil(random(0,10)));}
+    }); 
+var btn6 = new btnObj({
+    x:349,
+    y:199,
+    vari:6,
+    height:45,
+    width:50,
+    label:"Stand",
+    onClick: function(){currentScene = 0;}
+}); 
 mouseClicked = function() {
     btn1.handleMouseClick();
     btn2.handleMouseClick();
     btn3.handleMouseClick();
+    btn5.handeMouseClick();
+    btn6.handeMouseClick();
 };
 var Splash = function(){
         background(102, 196, 255);
@@ -78,26 +102,70 @@ var Splash = function(){
         fill(255, 0, 0);
         text("4",170,230);
         fill(0, 47, 255);
-        text("J",255,230);
+        text("2",255,230);
     
+};
+var Game = function(){
+    DealerCard.splice(0,2,ceil(random(0,10)),ceil(random(0,10)));
+    PlayerCard.splice(0,2,ceil(random(0,10)),ceil(random(0,10)));
+    DealerValue = DealerCard[0]+DealerCard[1];
+    PlayerValue = PlayerCard[0]+PlayerCard[1];
+    if (DealerValue < 15){
+        DealerCard.splice(2,1,ceil(random(0,10)));
+    }
 };
 var GameScene= function(){
     background(71, 255, 178);
+    fill(255, 255, 255);
+    rect(1,245,95,150);
+    rect(100,245,95,150);
+    rect(200,245,95,150);
+    rect(300,245,95,150);
+    
+    rect(1,5,95,150);
+    rect(100,5,95,150);
+    rect(200,5,95,150);
+    rect(300,5,95,150);
+    textSize(15);
+    Game();
+    fill(0, 0, 0);
+    text("Your cards value = " + PlayerValue, 10,235);
+    text("Dealer cards value = " + PlayerValue, 10,165);
+    for(var k = 0; k < 2; k++){
+        fill(0, 0, 0);
+        text(DealerCard[k],40+k*102,80);
+    }
+    for(var k = 0; k < 2; k++){
+        fill(0, 0, 0);
+        text(PlayerCard[k],40+k*102,325);
+    }
 };
 var Rules = function(){
     background(204, 153, 255);
+    fill(0, 0, 0);
+    textSize(39);
+    text("BlackJack Rules", 55,20,300,150);
+    textSize(17);
+    text("- Goal is to beat the dealer by getting closer 21 than them without going over", 55,80,300,150);
+    text("- You get an initial hand of two cards", 55,115,300,150);
+    text("- You can choose to either stand (keep your hand) or hit (add another card)", 55,150,300,150);
+    text("- Best of Luck :D", 55,185,300,150);
 };
 var draw = function() {
+    frameRate(0.5);
     if(currentScene === 0){
-        Splash();
-        btn1.draw();
-        btn2.draw();
+            Splash();
+            btn1.draw();
+            btn2.draw();
     }
-    else if(currentScene === 1){
-            GameScene();
+    if(currentScene === 1){
+        GameScene();
+        btn5.draw();
+        btn6.draw();
+        
     }
-    else if (currentScene === 2){
-        Rules();  
-        btn3.draw();
+    if (currentScene === 2){
+            Rules();  
+            btn3.draw();
     }
 };
