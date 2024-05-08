@@ -1,0 +1,103 @@
+var currentScene = 0;
+var btnObj = function(config){
+    this.x = config.x;
+    this.y = config.y;
+    this.vari = config.vari || 40;
+    this.width = config.width || 100;
+    this.height = config.height || 50;
+    this.label = config.label || "Click Here";
+    this.onClick = config.onClick || function(){};
+};
+btnObj.prototype.draw = function() {
+    fill(255, 255, 255);
+    rect(this.x,this.y,this.width,this.height);
+    fill(0, 0, 0);
+    textSize(15);
+    textAlign(LEFT,CENTER);
+    text(this.label,this.x+this.vari,this.y+this.height/2);
+};
+btnObj.prototype.isMouseInside = function(){
+   return mouseX > this.x && mouseX < (this.x + this.width) && mouseY > this.y && mouseY < (this.y + this.height);
+};
+btnObj.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+var btn1 = new btnObj({
+    x: 125,
+    y: 320,
+    width:150,
+    label: "Play Now!",
+    onClick: function(){currentScene = 1;}
+});
+var btn2 = new btnObj({
+    x:285,
+    y:340,
+    vari:30,
+    width:100,
+    label:"Rules",
+    onClick: function(){currentScene = 2;}
+});
+var btn3 = new btnObj({
+    x:10,
+    y:340,
+    vari:5,
+    width:100,
+    label:"Back to Start!",
+    onClick: function(){currentScene = 0;}
+});
+mouseClicked = function() {
+    btn1.handleMouseClick();
+    btn2.handleMouseClick();
+    btn3.handleMouseClick();
+};
+var Splash = function(){
+        background(102, 196, 255);
+        text("Antonio and Kai present...",115,50);
+        textSize(50);
+        text("BLACKJACK!",50,129);
+        fill(255, 255, 255);
+        rect(10,10,80,80);
+        rect(310,10,80,80);
+        fill(0, 0, 0);
+        ellipse(25,25,15,15);
+        ellipse(75,25,15,15);
+        ellipse(25,75,15,15);
+        ellipse(75,75,15,15);
+        ellipse(325,25,15,15);
+        ellipse(350,50,15,15);
+        ellipse(375,75,15,15);
+        fill(255, 255, 255);
+        rect(80,175,75,115);
+        rect(160,175,75,115);
+        rect(240,175,75,115);
+        textSize(100);
+        fill(0, 0, 0);
+        text("7",90,230);
+        fill(255, 0, 0);
+        text("4",170,230);
+        fill(0, 47, 255);
+        text("J",255,230);
+    
+};
+var GameScene= function(){
+    background(71, 255, 178);
+};
+var Rules = function(){
+    background(204, 153, 255);
+};
+var draw = function() {
+    if(currentScene === 0){
+        Splash();
+        btn1.draw();
+        btn2.draw();
+    }
+    else if(currentScene === 1){
+            GameScene();
+    }
+    else if (currentScene === 2){
+        Rules();  
+        btn3.draw();
+    }
+};
