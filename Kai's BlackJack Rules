@@ -1,0 +1,58 @@
+background(102, 196, 1255);
+
+fill(0, 0, 0);
+
+textSize(39);
+
+text("BlackJack Rules", 55,20,300,150);
+
+textSize(17);
+text("- Goal is to beat the dealer by getting closer 21 than them", 55,81,300,150);
+
+text("- With an initial hand of three cards, you can choose to either stand (keep your hand)", 55,143,300,150);
+
+text("- Or hit (add one more card to your hand)", 55,230,300,150);
+
+var Button = function(config) {
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 96;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fill(255, 255, 255);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(19);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x+10, this.y+this.height/4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+           mouseX < (this.x + this.width) &&
+           mouseY > this.y &&
+           mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+
+var startButton = new Button({
+    x: 146,
+    y: 335,
+    label: "Go back",
+    onClick: function() {
+    }
+});
+startButton.draw();
+
+mouseClicked = function() {
+    startButton.handleMouseClick();
+};
