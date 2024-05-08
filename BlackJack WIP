@@ -33,7 +33,13 @@ var btn1 = new btnObj({
     y: 320,
     width:150,
     label: "Play Now!",
-    onClick: function(){currentScene = 1;}
+    onClick: function(){
+        currentScene = 1;
+        DealerCard.splice(0,2,ceil(random(0,9)),ceil(random(0,9)));
+        PlayerCard.splice(0,2,ceil(random(0,9)),ceil(random(0,9)));
+        DealerValue = DealerCard[0]+DealerCard[1];
+        PlayerValue = PlayerCard[0]+PlayerCard[1];
+    }
 });
 var btn2 = new btnObj({
     x:255,
@@ -80,16 +86,18 @@ var Splash = function(){
         text("2",255,230);
     
 };
-DealerCard.splice(0,2,ceil(random(0,9)),ceil(random(0,9)));
-PlayerCard.splice(0,2,ceil(random(0,9)),ceil(random(0,9)));
-DealerValue = DealerCard[0]+DealerCard[1];
-PlayerValue = PlayerCard[0]+PlayerCard[1];
 var CheckWin = function(){
+    background(255, 255, 255);
     if (PlayerValue > DealerValue && PlayerValue <= 21){
         textSize(45);
         text("You won this round",10,200);
     }
-};
+    else if (PlayerValue === DealerValue && PlayerValue <=21){
+        textSize(45);
+        text("Draw, no one wins",10,200);
+    }
+    else{textSize(39); text("Dealer won this time...",10,200);}
+}; 
 var btn5 = new btnObj({
         x:349,
         y:156,
@@ -106,7 +114,7 @@ var btn6 = new btnObj({
     height:45,
     width:50,
     label:"Stand",
-    onClick: function(){CheckWin();}
+    onClick: function(){currentScene = 3;}
 }); 
 mouseClicked = function() {
     btn1.handleMouseClick();
@@ -128,7 +136,6 @@ var Game = function(){
      text("You drew too much >:(",10,200);   
     }
 };
-
 var GameScene= function(){
     background(71, 255, 178);
     fill(255, 255, 255);
@@ -182,5 +189,8 @@ var draw = function() {
             Rules();  
             btn3.draw();
     }
+    if (currentScene === 3){
+        CheckWin();  
+        btn1.draw();
+    }
 };
-
