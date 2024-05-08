@@ -3,6 +3,142 @@ var DealerCard = [];
 var PlayerCard = [];
 var DealerValue = 0;
 var PlayerValue = 0;
+var drawBody = function (bitmojiX,bitmojiY,bitmojiZ){
+var h = bitmojiZ/141;
+
+stroke(105,57,47);
+strokeWeight(2);
+fill(166, 111, 89);
+rect(bitmojiX+h*136,bitmojiY+h*343,h*106,h*-136);
+fill(125,129,170);
+rect(bitmojiX+h*174,bitmojiY+h*343,h*28,h*-136);
+
+fill(246,224,216);
+rect(bitmojiX+h*174,bitmojiY+h*343,h*7,h*-136);
+rect(bitmojiX+h*195,bitmojiY+h*343,h*7,h*-136);
+
+noStroke();
+fill(190, 108, 82);
+ellipse(bitmojiX+h*188,bitmojiY+h*148,h*120,h*141);
+
+fill(255, 255, 255);
+ellipse(bitmojiX+h*124,bitmojiY+h*187,h*41,h*60);
+ellipse(bitmojiX+h*124,bitmojiY+h*199,h*43,h*69);
+ellipse(bitmojiX+h*252,bitmojiY+h*187,h*41,h*60);
+ellipse(bitmojiX+h*252,bitmojiY+h*199,h*43,h*69);
+    };
+var drawFace = function (bitmojiX,bitmojiY,bitmojiZ){
+var h = bitmojiZ/141;
+
+noFill(); //glasses
+stroke(bitmojiX+h*44, bitmojiY+h*106, h*202);
+strokeWeight(2);
+rect(bitmojiX+h*152,bitmojiY+h*132,h*30,h*23);
+rect(bitmojiX+h*194,bitmojiY+h*132,h*30,h*23);
+fill(44, 106, 202);
+rect(bitmojiX+h*182,bitmojiY+h*140,h*11,h*4);
+rect(bitmojiX+h*141,bitmojiY+h*140,h*11,h*2);
+rect(bitmojiX+h*225,bitmojiY+h*140,h*11,h*2);
+
+noStroke(); //ears
+fill(190, 108, 82);
+ellipse(bitmojiX+h*133,bitmojiY+h*149,h*29,h*26);
+ellipse(bitmojiX+h*241,bitmojiY+h*149,h*29,h*26);
+
+stroke(0, 0, 0); //smile
+strokeWeight(3);
+fill(255, 255, 255);
+rect(bitmojiX+h*164,bitmojiY+h*185,h*16,h*8); //Leftmost
+noStroke();
+rect(bitmojiX+h*183,bitmojiY+h*189,h*14,h*8); // 2nd white rectangle
+noStroke();
+rect(bitmojiX+h*170,bitmojiY+h*187,h*16,h*9); //White rectangle
+fill(0, 0, 0);
+rect(bitmojiX+h*157,bitmojiY+h*181,h*12,h*4); // Left corner black line
+fill(0, 0, 0);
+rect(bitmojiX+h*179,bitmojiY+h*190,h*18,h*-4); // 2nd black line
+fill(0, 0, 0);
+rect(bitmojiX+h*170,bitmojiY+h*199,h*28,h*-4); // 3rd black line
+fill(0, 0, 0);
+rect(bitmojiX+h*197,bitmojiY+h*193,h*12,h*-4); // 3rd black line
+fill(0, 0, 0);
+rect(bitmojiX+h*197,bitmojiY+h*196,h*6,h*-4); // 3rd black line
+
+fill(0, 0, 0); //Eyes
+ellipse(bitmojiX+h*167,bitmojiY+h*144,h*16,h*16);
+rect(bitmojiX+h*209,bitmojiY+h*136,h*7,h*3);
+rect(bitmojiX+h*204,bitmojiY+h*139,h*7,h*3);
+rect(bitmojiX+h*200,bitmojiY+h*142,h*7,h*3);
+rect(bitmojiX+h*204,bitmojiY+h*145,h*7,h*3);
+rect(bitmojiX+h*209,bitmojiY+h*148,h*7,h*3);
+};
+var drawExtras = function (bitmojiX, bitmojiY, bitmojiZ){
+var h = bitmojiZ/141;
+
+fill(0, 0, 0); // Hair
+ellipse(bitmojiX+h*255,bitmojiY+h*119,h*48,h*45);
+ellipse(bitmojiX+h*222,bitmojiY+h*97,h*48,h*45);
+ellipse(bitmojiX+h*135,bitmojiY+h*98,h*35,h*43);
+ellipse(bitmojiX+h*124,bitmojiY+h*119,h*36,h*39);
+ellipse(bitmojiX+h*234,bitmojiY+h*91,h*48,h*45);
+ellipse(bitmojiX+h*155,bitmojiY+h*91,h*48,h*45);
+ellipse(bitmojiX+h*185,bitmojiY+h*83,h*48,h*45);
+ellipse(bitmojiX+h*208,bitmojiY+h*81,h*48,h*45);
+ellipse(bitmojiX+h*163,bitmojiY+h*87,h*32,h*45);
+ellipse(bitmojiX+h*252,bitmojiY+h*102,h*32,h*35);
+ellipse(bitmojiX+h*137,bitmojiY+h*110,h*32,h*45);
+
+stroke(93,14,18); //scarf
+strokeWeight(2);
+fill(224, 52, 58);
+rect(bitmojiX+h*217,bitmojiY+h*202,h*29,h*28,h*20);
+rect(bitmojiX+h*140,bitmojiY+h*204,h*91,h*29,h*20);
+
+fill(56, 49, 247); //initials
+textSize (h*28);
+text("I",bitmojiX+h*150,bitmojiY+h*270,h*30,h*30);
+text("G",bitmojiX+h*209,bitmojiY+h*270,h*30,h*30);
+};
+var drawBitmoji = function(bitmojiX, bitmojiY, bitmojiZ){
+    drawBody(bitmojiX, bitmojiY, bitmojiZ);
+    drawFace(bitmojiX, bitmojiY, bitmojiZ);
+    drawExtras(bitmojiX, bitmojiY, bitmojiZ);
+};
+var drawMoji = function(BitmojiX,BitmojiY,BitmojiH){
+    var ratio = BitmojiH/70;
+    var drawHead = function(){
+        noStroke();
+        fill(238, 207, 180); //Skin tone
+        ellipse(BitmojiX+82*ratio,BitmojiY-24*ratio,50*ratio,60*ratio); //Head
+        fill(84, 76, 40);//eye color
+        ellipse(BitmojiX+72*ratio,BitmojiY-26*ratio,6*ratio,6*ratio);//Left eye
+        ellipse(BitmojiX+92*ratio,BitmojiY-26*ratio,6*ratio,6*ratio); //Right eye
+        fill(255, 94, 94);//mouth color
+        arc(BitmojiX+82*ratio,BitmojiY-11*ratio,21*ratio,18*ratio,-352,-188); //mouth
+        fill(255, 255, 255);//tooth color
+        rect(BitmojiX+72*ratio,BitmojiY-11*ratio,20*ratio,3*ratio,550*ratio);//teeth
+        fill(0, 0, 255); //Hat color
+        ellipse(BitmojiX+82*ratio,BitmojiY-53*ratio,42*ratio,32*ratio); //Hat part 2
+        arc(BitmojiX+82*ratio,BitmojiY-36*ratio,51*ratio,48*ratio,167,374); //hat part 1
+    };
+    var drawBody = function(){
+        fill(143, 143, 143); //Grey sweatshirt color
+        rect(BitmojiX+1*ratio,BitmojiY+1*ratio,78*ratio,21*ratio); //Left arm
+        rect(BitmojiX+84*ratio,BitmojiY+1*ratio,78*ratio,21*ratio); //Right arm
+        arc(BitmojiX+82*ratio,BitmojiY,160*ratio,57*ratio,-1,182); //Shoulders
+        rect(BitmojiX+42*ratio,BitmojiY+1*ratio,80*ratio,80*ratio); //Body
+        fill(92, 92, 92); //zipper color
+        rect(BitmojiX+80*ratio,BitmojiY-4*ratio,2*ratio,84*ratio); //zipper
+        fill(0, 0, 0); //logo color
+        triangle(BitmojiX+95*ratio,BitmojiY+20*ratio,BitmojiX+117*ratio,BitmojiY+20*ratio,BitmojiX+106*ratio,BitmojiY+6*ratio); //Logo
+        fill(255, 255, 255);//initials color
+        textSize(30*ratio);//initial size
+        text("AA",BitmojiX+62*ratio,BitmojiY+48*ratio);//initials
+    };
+drawHead(BitmojiX,BitmojiY,BitmojiH);
+drawBody(BitmojiX,BitmojiY,BitmojiH);
+};
+stroke(1);
 var btnObj = function(config){
     this.x = config.x;
     this.y = config.y;
@@ -59,6 +195,8 @@ var btn3 = new btnObj({
 });
 var Splash = function(){
         background(102, 196, 255);
+        textSize(15);
+        fill(0, 0, 0);
         text("Antonio and Kai present...",115,50);
         textSize(50);
         text("BLACKJACK!",50,129);
@@ -88,6 +226,14 @@ var Splash = function(){
 };
 var CheckWin = function(){
     background(255, 255, 255);
+    fill(255, 255, 255);
+    rect(100,5,95,150);
+    rect(200,5,95,150);
+    for(var k = 0; k < 2; k++){
+        fill(0, 0, 0);
+        textSize(100);
+        text(DealerCard[k],120+k*100,80);
+    }
     if (PlayerValue > DealerValue && PlayerValue <= 21){
         textSize(45);
         text("You won this round",10,200);
@@ -96,25 +242,45 @@ var CheckWin = function(){
         textSize(45);
         text("Draw, no one wins",10,200);
     }
-    else{textSize(39); text("Dealer won this time...",10,200);}
+    else{textSize(39); text("You lost this time...",10,200);}
+}; 
+var CheckWin1 = function(){
+    background(255, 255, 255);
+    fill(255, 255, 255);
+    rect(100,5,95,150);
+    rect(200,5,95,150);
+    for(var k = 0; k < 2; k++){
+        fill(0, 0, 0);
+        textSize(100);
+        text(DealerCard[k],120+k*100,80);
+    }
+    if (PlayerValue < DealerValue && PlayerValue <= 21){
+        textSize(45);
+        text("You won this round",10,200);
+    }
+    else if (PlayerValue === DealerValue && PlayerValue <=21){
+        textSize(45);
+        text("Draw, no one wins",10,200);
+    }
+    else{textSize(39); text("You lost this time...",10,200);}
 }; 
 var btn5 = new btnObj({
-        x:349,
-        y:156,
+        x:1,
+        y:165,
         vari:15,
-        height:45,
-        width:50,
-        label:"Hit",
-        onClick: function(){PlayerCard.push(ceil(random(0,10)));}
+        height:75,
+        width:100,
+        label:"Lower",
+        onClick: function(){currentScene = 3;}
     }); 
 var btn6 = new btnObj({
-    x:349,
-    y:199,
+    x:299,
+    y:165,
     vari:6,
-    height:45,
-    width:50,
-    label:"Stand",
-    onClick: function(){currentScene = 3;}
+    height:75,
+    width:100,
+    label:"Higher",
+    onClick: function(){currentScene = 4;}
 }); 
 mouseClicked = function() {
     btn1.handleMouseClick();
@@ -139,28 +305,23 @@ var Game = function(){
 var GameScene= function(){
     background(71, 255, 178);
     fill(255, 255, 255);
-    rect(1,245,95,150);
     rect(100,245,95,150);
     rect(200,245,95,150);
-    rect(300,245,95,150);
-    
-    rect(1,5,95,150);
     rect(100,5,95,150);
     rect(200,5,95,150);
-    rect(300,5,95,150);
     textSize(15);
     Game();
     fill(0, 0, 0);
-    text("Your cards value = " + PlayerValue, 10,235);
-    text("Dealer cards value = " + DealerValue, 10,165);
+    text("Your cards value = " + PlayerValue, 122,235);
     textSize(150);
+    text("?",110,80);
     for(var k = 0; k < 2; k++){
         fill(0, 0, 0);
-        text(DealerCard[k],8+k*102,80);
+        text(DealerCard[1],210,80);
     }
     for(var k = 0; k < 2; k++){
         fill(0, 0, 0);
-        text(PlayerCard[k],8+k*102,325);
+        text(PlayerCard[k],100+k*110,325);
     }
 };
 var Rules = function(){
@@ -171,8 +332,9 @@ var Rules = function(){
     textSize(17);
     text("- Goal is to beat the dealer by getting closer 21 than them without going over", 55,80,300,150);
     text("- You get an initial hand of two cards", 55,115,300,150);
-    text("- You can choose to either stand (keep your hand) or hit (add another card)", 55,150,300,150);
-    text("- Best of Luck :D", 55,185,300,150);
+    text("- Dealer gets 2 but you only see 1", 55,139,300,150);
+    text("- Decide if your cards are higher or lower.", 55,176,300,150);
+    text("- Best of Luck :D", 55,205,300,150);
 };
 var draw = function() {
     frameRate(30);
@@ -180,6 +342,8 @@ var draw = function() {
             Splash();
             btn1.draw();
             btn2.draw();
+            drawBitmoji(-45,138,63);
+            drawMoji(315,226,38);
     }
     if(currentScene === 1){
         GameScene();
@@ -192,5 +356,11 @@ var draw = function() {
     if (currentScene === 3){
         CheckWin();  
         btn1.draw();
+        btn3.draw();
+    }
+    if (currentScene === 4){
+        CheckWin1();  
+        btn1.draw();
+        btn3.draw();
     }
 };
